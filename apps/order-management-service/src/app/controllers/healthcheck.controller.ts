@@ -4,6 +4,7 @@ import {
   HealthCheckResult,
   HealthCheckService,
   HealthIndicatorFunction,
+  MongooseHealthIndicator,
 } from '@nestjs/terminus';
 import { ApiExcludeEndpoint } from '@nestjs/swagger';
 
@@ -11,14 +12,19 @@ import { ApiExcludeEndpoint } from '@nestjs/swagger';
 export class HealthCheckController {
   private logger = new Logger(this.constructor.name);
 
-  constructor(private healthCheck: HealthCheckService) {}
+  constructor(
+    private healthCheck: HealthCheckService,
+    private mongooseHealth: MongooseHealthIndicator
+  ) {}
 
   @Get()
   @HealthCheck()
   @ApiExcludeEndpoint(true)
   async check(): Promise<HealthCheckResult> {
     try {
-      const checks: HealthIndicatorFunction[] = [];
+      const checks: HealthIndicatorFunction[] = [
+        () => this.mongooseHealth.pingCheck('mongodb'),
+      ];
 
       return await this.healthCheck.check(checks);
     } catch (error) {

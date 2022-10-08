@@ -10,7 +10,7 @@ import { AppModule } from './app/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    bufferLogs: true,
+    //bufferLogs: true,
   });
   // Inject custom logger library, which handle Dev/Prod logging
   // differently. The `WINSTON_LOGGER_PROVIDER` configures logger transports,

@@ -36,6 +36,6 @@ services:
       - ./nx.json:/usr/nx.json
       - ./package.json:/usr/package.json
     depends_on:
-      - oms-mongo
+      - mongo
 volumes:
   mongodb:
