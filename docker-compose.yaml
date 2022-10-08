@@ -1,0 +1,27 @@
+# This docker compose makes use of unofficial images
+# due to confluent only offering linux/amd arch images and not multi-platform.
+# As soon as official multi-platform images are out, use them here.
+# More info: https://eb7team.atlassian.net/browse/AP-695
+
+---
+version: '3'
+services:
+  order-management-service:
+    container_name: order-management-service
+    image: order-management-service:1.0.0
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: yarn nx serve order-management-service --host 0.0.0.0
+    ports:
+      - 3333:3333
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./apps/:/usr/src/app/apps/
+      - ./libs/:/usr/src/app/libs
+      - ./tools/:/usr/src/app/tools/
+      - ./node_modules:/usr/src/app/node_modules
+      - ./tsconfig.base.json:/usr/src/app/tsconfig.base.json
+      - ./nx.json:/usr/nx.json
+      - ./package.json:/usr/package.json
