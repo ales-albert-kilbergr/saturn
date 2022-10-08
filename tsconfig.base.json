@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@oms/nestjs-helpers": ["libs/nestjs-helpers/src/index.ts"]
+      "@oms/nestjs-helpers": ["libs/nestjs-helpers/src/index.ts"],
+      "@oms/order-data": ["libs/order-data/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

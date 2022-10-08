@@ -5,6 +5,7 @@ import { TerminusModule } from '@nestjs/terminus';
 import { OrderManagementConfigModule, resolveAsyncConfig } from '../config';
 import { WinstonModule } from 'nest-winston';
 import { MongooseModule } from '@nestjs/mongoose';
+import { OrderDataModule } from '@oms/order-data';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     OrderManagementConfigModule,
     WinstonModule.forRootAsync(resolveAsyncConfig('winstonConfig')),
     MongooseModule.forRootAsync(resolveAsyncConfig('mongoConfig')),
+    OrderDataModule,
   ],
   controllers: [HealthCheckController],
   providers: [AppService],
