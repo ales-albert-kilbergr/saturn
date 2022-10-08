@@ -37,5 +37,25 @@ services:
       - ./package.json:/usr/package.json
     depends_on:
       - mongo
+  order-producer:
+    container_name: order-producer
+    image: order-producer:1.0.0
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: yarn nx serve order-producer --host 0.0.0.0
+    ports:
+      - 3334:3334
+    environment:
+      NODE_ENV: development
+      APP_PORT: 3334
+    volumes:
+      - ./apps/:/usr/src/app/apps/
+      - ./libs/:/usr/src/app/libs
+      - ./tools/:/usr/src/app/tools/
+      - ./node_modules:/usr/src/app/node_modules
+      - ./tsconfig.base.json:/usr/src/app/tsconfig.base.json
+      - ./nx.json:/usr/nx.json
+      - ./package.json:/usr/package.json
 volumes:
   mongodb:
