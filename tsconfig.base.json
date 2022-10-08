@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@oms/nestjs-helpers": ["libs/nestjs-helpers/src/index.ts"],
-      "@oms/order-data": ["libs/order-data/src/index.ts"]
+      "@oms/order-data": ["libs/order-data/src/index.ts"],
+      "@oms/order-events": ["libs/order-events/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
