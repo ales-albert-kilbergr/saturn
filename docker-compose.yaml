@@ -6,6 +6,13 @@
 ---
 version: '3'
 services:
+  mongo:
+    image: mongo:latest
+    container_name: oms-mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/saturn-db
   order-management-service:
     container_name: order-management-service
     image: order-management-service:1.0.0
@@ -25,3 +32,7 @@ services:
       - ./tsconfig.base.json:/usr/src/app/tsconfig.base.json
       - ./nx.json:/usr/nx.json
       - ./package.json:/usr/package.json
+    depends_on:
+      - oms-mongo
+volumes:
+  mongodb:
