@@ -4,6 +4,13 @@ import { IsString, validateSync } from 'class-validator';
 export class EnvironmentVariables {
   @IsString()
   public APP_PORT: string;
+
+  @IsString()
+  public KAFKA_CLIENT_BROKER: string;
+
+  @IsString()
+  public KAFKA_CLIENT_CLIENT_ID: string;
+
   /**
    *
    */

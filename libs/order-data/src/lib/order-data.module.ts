@@ -1,10 +1,18 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import { OrderModelDefinition } from './schemas';
+import { getModelToken, MongooseModule } from '@nestjs/mongoose';
+import { Order, OrderModelDefinition } from './schemas';
+
+export const ORDER_MODEL = Symbol.for('order.model');
 
 @Module({
   imports: [MongooseModule.forFeature([OrderModelDefinition])],
-  providers: [],
-  exports: [],
+  providers: [
+    {
+      provide: ORDER_MODEL,
+      useFactory: (model) => model,
+      inject: [getModelToken(Order.name)],
+    },
+  ],
+  exports: [ORDER_MODEL],
 })
 export class OrderDataModule {}

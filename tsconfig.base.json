@@ -15,9 +15,16 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@oms/nest-kafka-client": ["libs/nest-kafka-client/src/index.ts"],
       "@oms/nestjs-helpers": ["libs/nestjs-helpers/src/index.ts"],
       "@oms/order-data": ["libs/order-data/src/index.ts"],
-      "@oms/order-events": ["libs/order-events/src/index.ts"]
+      "@oms/order-events": ["libs/order-events/src/index.ts"],
+      "@oms/order-management-consumer": [
+        "libs/order-management-consumer/src/index.ts"
+      ],
+      "@oms/order-management-gql-api": [
+        "libs/order-management-gql-api/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -7,6 +7,7 @@ import {
   MongooseHealthIndicator,
 } from '@nestjs/terminus';
 import { ApiExcludeEndpoint } from '@nestjs/swagger';
+import { KafkaConsumerHealthcheckIndicator } from '../services';
 
 @Controller('health')
 export class HealthCheckController {
@@ -14,7 +15,8 @@ export class HealthCheckController {
 
   constructor(
     private healthCheck: HealthCheckService,
-    private mongooseHealth: MongooseHealthIndicator
+    private mongooseHealth: MongooseHealthIndicator,
+    private kakfaConsumerHealth: KafkaConsumerHealthcheckIndicator
   ) {}
 
   @Get()
@@ -24,6 +26,7 @@ export class HealthCheckController {
     try {
       const checks: HealthIndicatorFunction[] = [
         () => this.mongooseHealth.pingCheck('mongodb'),
+        () => this.kakfaConsumerHealth.isHealthy(),
       ];
 
       return await this.healthCheck.check(checks);
