@@ -93,5 +93,26 @@ services:
       - ./tsconfig.base.json:/usr/src/app/tsconfig.base.json
       - ./nx.json:/usr/nx.json
       - ./package.json:/usr/package.json
+  order-management-browser-app:
+    container_name: order-management-browser-app
+    image: order-management-browser-app:1.0.0
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: yarn nx serve order-management-browser-app --host 0.0.0.0 --port 4200
+    ports:
+      - 4200:4200
+    expose:
+      - 4200
+    environment:
+      - ORDER_MANAGEMENT_SERVICE_PROXY=http://iam-api:3334
+    volumes:
+      - ./apps/:/usr/src/app/apps/
+      - ./libs/:/usr/src/app/libs
+      - ./tools/:/usr/src/app/tools/
+      - ./node_modules:/usr/src/app/node_modules
+      - ./tsconfig.base.json:/usr/src/app/tsconfig.base.json
+      - ./nx.json:/usr/nx.json
+      - ./package.json:/usr/package.json
 volumes:
   mongodb:

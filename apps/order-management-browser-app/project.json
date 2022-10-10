@@ -1,0 +1,86 @@
+{
+  "name": "order-management-browser-app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/order-management-browser-app/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/order-management-browser-app",
+        "index": "apps/order-management-browser-app/src/index.html",
+        "baseHref": "/",
+        "main": "apps/order-management-browser-app/src/main.tsx",
+        "polyfills": "apps/order-management-browser-app/src/polyfills.ts",
+        "tsConfig": "apps/order-management-browser-app/tsconfig.app.json",
+        "assets": [
+          "apps/order-management-browser-app/src/favicon.ico",
+          "apps/order-management-browser-app/src/assets"
+        ],
+        "styles": ["apps/order-management-browser-app/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/order-management-browser-app/src/environments/environment.ts",
+              "with": "apps/order-management-browser-app/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "order-management-browser-app:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "order-management-browser-app:build:development"
+        },
+        "production": {
+          "buildTarget": "order-management-browser-app:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/order-management-browser-app/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/order-management-browser-app"],
+      "options": {
+        "jestConfig": "apps/order-management-browser-app/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

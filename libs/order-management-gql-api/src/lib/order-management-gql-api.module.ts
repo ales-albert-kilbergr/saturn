@@ -10,6 +10,7 @@ import { OrderManagementGqlConfig } from './order-management-gql.config';
 import { QUERIES } from './queries';
 import { OrderDataModule } from '@oms/order-data';
 import { OrderState } from '@oms/order-events';
+import { MUTATIONS } from './mutations';
 
 export type OrderMamagementGqlApiAsyncConfig =
   INestjsAsyncConfig<OrderManagementGqlConfig>;
@@ -64,6 +65,7 @@ export class OrderManagementGqlApiModule {
           asyncConfig.inject
         ),
         ...QUERIES,
+        ...MUTATIONS,
       ],
       exports: [OrderManagementGqlConfig],
     };

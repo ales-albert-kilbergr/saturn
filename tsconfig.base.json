@@ -24,7 +24,8 @@
       ],
       "@oms/order-management-gql-api": [
         "libs/order-management-gql-api/src/index.ts"
-      ]
+      ],
+      "@oms/react-helpers": ["libs/react-helpers/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
