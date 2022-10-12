@@ -52,6 +52,7 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "order-management-browser-app:build",
+        "proxyConfig": "apps/order-management-browser-app/proxy.conf.js",
         "hmr": true
       },
       "configurations": {

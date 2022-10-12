@@ -1,3 +1,22 @@
 {
-
+  "8YVrFn": {
+    "defaultMessage": "Auftragsverwaltungsdienst",
+    "description": "Application title"
+  },
+  "IgvG/M": {
+    "defaultMessage": "Deutsch",
+    "description": "German language title"
+  },
+  "KHJCun": {
+    "defaultMessage": "Englisch (US)",
+    "description": "English language title"
+  },
+  "WrSFZP": {
+    "defaultMessage": "Französisch",
+    "description": "French language title"
+  },
+  "ZzRWmv": {
+    "defaultMessage": "Wähle eine Sprache",
+    "description": "Select language helper tooltip"
+  }
 }

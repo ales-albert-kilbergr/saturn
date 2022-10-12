@@ -8,9 +8,12 @@ import {
 } from '@oms/nestjs-helpers';
 import { OrderManagementGqlConfig } from './order-management-gql.config';
 import { QUERIES } from './queries';
-import { OrderDataModule } from '@oms/order-data';
+import { OrderCreatedInternalEvent, OrderDataModule } from '@oms/order-data';
 import { OrderState } from '@oms/order-events';
 import { MUTATIONS } from './mutations';
+import { PubSub } from 'graphql-subscriptions';
+import { EventBus, CqrsModule } from '@nestjs/cqrs';
+import { SUBSCRIPTIONS } from './subscriptions';
 
 export type OrderMamagementGqlApiAsyncConfig =
   INestjsAsyncConfig<OrderManagementGqlConfig>;
@@ -56,6 +59,7 @@ export class OrderManagementGqlApiModule {
           inject: [OrderManagementGqlConfig],
         }),
         OrderDataModule,
+        CqrsModule,
         ...asyncConfig.imports,
       ],
       providers: [
@@ -64,10 +68,26 @@ export class OrderManagementGqlApiModule {
           asyncConfig.useFactory,
           asyncConfig.inject
         ),
+        {
+          provide: PubSub,
+          useFactory: (eventBus: EventBus) => {
+            const pubSub = new PubSub();
+
+            eventBus.subscribe((event) => {
+              if (event instanceof OrderCreatedInternalEvent) {
+                pubSub.publish('orderCreated', { onOrderCreated: event });
+              }
+            });
+
+            return pubSub;
+          },
+          inject: [EventBus],
+        },
         ...QUERIES,
         ...MUTATIONS,
+        ...SUBSCRIPTIONS,
       ],
-      exports: [OrderManagementGqlConfig],
+      exports: [OrderManagementGqlConfig, PubSub],
     };
   }
 }

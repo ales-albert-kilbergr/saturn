@@ -105,7 +105,8 @@ services:
     expose:
       - 4200
     environment:
-      - ORDER_MANAGEMENT_SERVICE_PROXY=http://iam-api:3334
+      - ORDER_MANAGEMENT_SERVICE_PROXY=http://order-management-service:3333
+      - ORDER_MANAGEMENT_SERVICE_WS_PROXY=ws://order-management-service:3333
     volumes:
       - ./apps/:/usr/src/app/apps/
       - ./libs/:/usr/src/app/libs

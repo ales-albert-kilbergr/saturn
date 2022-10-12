@@ -2,7 +2,13 @@ import { Inject, Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { EachMessagePayload, Kafka } from 'kafkajs';
 import { OrderManagementConsumerConfig } from './order-management-consumer.config';
 import { OrderCreatedEvent, ORDER_TOPICS } from '@oms/order-events';
-import { OrderModel, ORDER_MODEL } from '@oms/order-data';
+import {
+  OrderCreatedInternalEvent,
+  OrderModel,
+  ORDER_MODEL,
+} from '@oms/order-data';
+import { EventBus } from '@nestjs/cqrs';
+
 @Injectable()
 export class OrderManagementConsumerService implements OnModuleInit {
   public readonly consumer = this.kafka.consumer(this.config.consumer);
@@ -13,7 +19,8 @@ export class OrderManagementConsumerService implements OnModuleInit {
     private kafka: Kafka,
     private config: OrderManagementConsumerConfig,
     @Inject(ORDER_MODEL)
-    private orderModel: OrderModel
+    private orderModel: OrderModel,
+    private eventBus: EventBus
   ) {}
 
   public async onModuleInit() {
@@ -50,7 +57,10 @@ export class OrderManagementConsumerService implements OnModuleInit {
 
     switch (decodedValue.type) {
       case OrderCreatedEvent.EVENT_TYPE:
-        await new this.orderModel(decodedValue.data.order).save();
+        // eslint-disable-next-line no-case-declarations
+        const order = new this.orderModel(decodedValue.data.order);
+        await order.save();
+        this.eventBus.publish(new OrderCreatedInternalEvent(order));
         break;
     }
   }

@@ -25,6 +25,10 @@
       "@oms/order-management-gql-api": [
         "libs/order-management-gql-api/src/index.ts"
       ],
+      "@oms/order-management-gql-client": [
+        "libs/order-management-gql-client/src/index.ts"
+      ],
+      "@oms/order-management-ui": ["libs/order-management-ui/src/index.ts"],
       "@oms/react-helpers": ["libs/react-helpers/src/index.ts"]
     }
   },

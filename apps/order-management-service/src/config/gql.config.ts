@@ -21,6 +21,9 @@ export const gqlApiConfig = registerAs('gqlApiConfig', async () => {
       origin: 'https://studio.apollographql.com',
       credentials: true,
     },
+    subscriptions: {
+      'graphql-ws': true,
+    },
   };
 
   return { gql: config };

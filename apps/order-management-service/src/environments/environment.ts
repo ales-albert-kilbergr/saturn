@@ -16,5 +16,5 @@ export const environment = {
    * https://www.apollographql.com/blog/announcement/platform/apollo-sandbox-an-open-graphql-ide-for-local-development/
    */
   gqlPlayground: 'apollo-sandbox',
-  kafkaClientLogLevel: logLevel.DEBUG,
+  kafkaClientLogLevel: logLevel.WARN,
 };

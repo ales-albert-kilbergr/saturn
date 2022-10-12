@@ -7,6 +7,7 @@ import {
 import { OrderManagementConsumerConfig } from './order-management-consumer.config';
 import { OrderManagementConsumerService } from './order-management-consumer.service';
 import { OrderDataModule } from '@oms/order-data';
+import { CqrsModule } from '@nestjs/cqrs';
 
 export type OrderManagementConsumerAsyncConfig =
   INestjsAsyncConfig<OrderManagementConsumerConfig>;
@@ -23,6 +24,7 @@ export class OrderManagementConsumerModule {
         NestKafkaClientModule,
         OrderDataModule,
         ...(asyncConfig.imports || []),
+        CqrsModule,
       ],
       providers: [
         createAsyncConfigProvider<OrderManagementConsumerConfig>(

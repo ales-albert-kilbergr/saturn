@@ -1,3 +1,22 @@
 {
-
+  "8YVrFn": {
+    "defaultMessage": "Service de gestion des commandes",
+    "description": "Application title"
+  },
+  "IgvG/M": {
+    "defaultMessage": "Allemand",
+    "description": "German language title"
+  },
+  "KHJCun": {
+    "defaultMessage": "Anglais (US)",
+    "description": "English language title"
+  },
+  "WrSFZP": {
+    "defaultMessage": "Français",
+    "description": "French language title"
+  },
+  "ZzRWmv": {
+    "defaultMessage": "Sélectionnez une langue",
+    "description": "Select language helper tooltip"
+  }
 }

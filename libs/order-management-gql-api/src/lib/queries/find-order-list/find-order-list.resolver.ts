@@ -30,10 +30,12 @@ export class FindOrderListResolver {
       filterQuery.state = filter.state;
     }
 
-    const orders = await this.orderModel.find(filterQuery, undefined, {
-      skip: paging?.offset || 0,
-      limit: paging?.limit || 100,
-    });
+    const orders = await this.orderModel
+      .find(filterQuery, undefined, {
+        skip: paging?.offset || 0,
+        limit: paging?.limit || 100,
+      })
+      .sort({ createdAt: -1 });
 
     const count = await this.orderModel.count(filterQuery);
 

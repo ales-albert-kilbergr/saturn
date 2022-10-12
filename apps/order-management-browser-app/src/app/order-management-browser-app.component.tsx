@@ -5,6 +5,9 @@ import {
   IReactIntlControllerProviderProps,
   useReactIntlControllerProvider,
 } from '@oms/react-helpers';
+import { OrderManagementUiProvider } from '@oms/order-management-ui';
+import { RouterProvider } from 'react-router';
+import { orderManagementBrowserAppRoutes } from './order-management-browser-app.routes';
 
 export interface IOrderManagementBrowserAppProps {
   defaultLocale: ReactIntlLocale;
@@ -18,12 +21,14 @@ export const OrderManagementBrowserApp: OrderManagementBrowserAppComponent = (
   props
 ) => {
   return (
-    <ReactIntlControllerProvider
-      defaultLocale={props.defaultLocale}
-      loadLocaleData={props.loadLocaleData}
-    >
-      <div>APP</div>
-    </ReactIntlControllerProvider>
+    <OrderManagementUiProvider>
+      <ReactIntlControllerProvider
+        defaultLocale={props.defaultLocale}
+        loadLocaleData={props.loadLocaleData}
+      >
+        <RouterProvider router={orderManagementBrowserAppRoutes} />
+      </ReactIntlControllerProvider>
+    </OrderManagementUiProvider>
   );
 };
 

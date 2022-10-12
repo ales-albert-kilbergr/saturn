@@ -1,0 +1,26 @@
+{
+  "name": "order-management-gql-client",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/order-management-gql-client/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/order-management-gql-client/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/order-management-gql-client"],
+      "options": {
+        "jestConfig": "libs/order-management-gql-client/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

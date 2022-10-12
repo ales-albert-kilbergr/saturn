@@ -1,0 +1,24 @@
+{
+  "name": "order-management-ui",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/order-management-ui/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/order-management-ui/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/order-management-ui"],
+      "options": {
+        "jestConfig": "libs/order-management-ui/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}
