@@ -86,7 +86,7 @@ export const OrderList: OrderListComponent = (props) => {
       </ListRow>
 
       <Box sx={{ overflowY: 'scroll', flex: '1' }}>
-        {props.list.items.map((order) => (
+        {props.list.items.slice(0, 100).map((order) => (
           <OrderListRow
             key={order.orderId}
             order={order}

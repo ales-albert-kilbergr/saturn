@@ -14,9 +14,9 @@ export class OrderFragment implements Order {
   @Field(() => [OrderItemFragment])
   public items: OrderItem[];
 
-  @Field(() => String)
-  public createdAt: string;
+  @Field(() => Date)
+  public createdAt: Date;
 
-  @Field(() => String)
-  public updatedAt: string;
+  @Field(() => Date)
+  public updatedAt: Date;
 }

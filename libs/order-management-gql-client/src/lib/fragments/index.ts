@@ -5,3 +5,5 @@ export * from './order-list-filter.fragment';
 export * from './order-list-paging.fragment';
 export * from './order-list.fragment';
 export * from './order-count.fragment';
+export * from './order-statistic-record.fragment';
+export * from './order-statistics.fragment';

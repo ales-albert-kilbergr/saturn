@@ -37,6 +37,7 @@
     "core-js": "^3.6.5",
     "country-flag-icons": "^1.5.5",
     "graphql": "^16.6.0",
+    "graphql-request": "^5.0.0",
     "graphql-subscriptions": "^2.0.0",
     "graphql-ws": "^5.11.2",
     "kafkajs": "^2.2.0",

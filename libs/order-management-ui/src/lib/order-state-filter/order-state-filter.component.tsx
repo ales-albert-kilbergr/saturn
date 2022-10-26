@@ -31,6 +31,7 @@ export const OrderStateFilter: OrderStateFilterComponent = (props) => {
       <Badge
         badgeContent={props.count}
         sx={{ top: props.isActive ? '2px' : undefined }}
+        max={100000}
       >
         <Typography fontWeight={props.isActive ? '900' : '400'}>
           {props.children}

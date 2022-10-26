@@ -12,6 +12,9 @@ import { ReactIntlLocale } from '@oms/react-helpers';
 import {
   ORDER_COUNT_TYPE_POLICY,
   ORDER_LIST_TYPE_POLICY,
+  ORDER_STATISTICS_FRAGMENT_GQL,
+  ORDER_STATISTICS_POLICY_TYPE,
+  ORDER_STATISTIC_RECORD_POLICY_TYPE,
   ORDER_TYPE_POLICY,
 } from '@oms/order-management-gql-client';
 import { createClient } from 'graphql-ws';
@@ -63,6 +66,8 @@ function main() {
         Order: ORDER_TYPE_POLICY,
         OrderCount: ORDER_COUNT_TYPE_POLICY,
         OrderList: ORDER_LIST_TYPE_POLICY,
+        OrderStatisticRecord: ORDER_STATISTIC_RECORD_POLICY_TYPE,
+        OrderStatistics: ORDER_STATISTICS_POLICY_TYPE,
       },
     }),
   });

@@ -1,11 +1,14 @@
 import {
   IOrder,
+  useFindCompleteOrderCount,
+  useFindInProgressOrderCount,
   useFindOpenOrderCount,
   useFindOrderCount,
+  useFindOrderStatistics,
   useUpdateOrderStateCallback,
   useWatchOrderListQuery,
 } from '@oms/order-management-gql-client';
-import { OrderList } from '@oms/order-management-ui';
+import { OrderList, OrderTimelineChart } from '@oms/order-management-ui';
 import * as React from 'react';
 
 export interface IOrderListViewProps {}
@@ -63,28 +66,43 @@ export const OrderListView: OrderListViewComponent = (props) => {
     [orders]
   );
 
-  const subscriptCount = useFindOpenOrderCount();
-  const openOrdersCountQuery = useFindOrderCount('OPEN');
-  const inProgressOrdersCountQuery = useFindOrderCount('IN_PROGRESS');
-  const completeOrdersCountQuery = useFindOrderCount('COMPLETE');
+  const to = React.useMemo(() => new Date(), []);
+  to.setMinutes(to.getMinutes() + 10);
+  const from = React.useMemo(() => {
+    const date = new Date();
+    date.setHours(to.getHours() - 12);
+    return date;
+  }, [to]);
+  const statistics = useFindOrderStatistics({
+    filter: {
+      to,
+      from,
+      bucketSize: 1000 * 60 * 10, // 10 minutes
+    },
+  });
+
+  const openOrdersCount = useFindOpenOrderCount();
+  const inProgressOrdersCount = useFindInProgressOrderCount();
+  const completeOrdersCount = useFindCompleteOrderCount();
 
   return orders.data?.findOrderList.list ? (
-    <OrderList
-      list={orders.data?.findOrderList.list}
-      onAssign={handleOrderAssign}
-      onComplete={handleOrderCompleted}
-      onFilter={handleListFilter}
-      orderStateFilter={orderStateFilter}
-      openOrdersCount={
-        openOrdersCountQuery.data?.findOrderCount.orderCount.count
-      }
-      inProgressOrdersCount={
-        inProgressOrdersCountQuery.data?.findOrderCount.orderCount.count
-      }
-      comleteOrdersCount={
-        completeOrdersCountQuery.data?.findOrderCount.orderCount.count
-      }
-    />
+    <>
+      {statistics.data?.findOrderStatistics.statistics && (
+        <OrderTimelineChart
+          statistics={statistics.data?.findOrderStatistics.statistics}
+        />
+      )}
+      <OrderList
+        list={orders.data?.findOrderList.list}
+        onAssign={handleOrderAssign}
+        onComplete={handleOrderCompleted}
+        onFilter={handleListFilter}
+        orderStateFilter={orderStateFilter}
+        openOrdersCount={openOrdersCount}
+        inProgressOrdersCount={inProgressOrdersCount}
+        comleteOrdersCount={completeOrdersCount}
+      />
+    </>
   ) : null;
 };
 

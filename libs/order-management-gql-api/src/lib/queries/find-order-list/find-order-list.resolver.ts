@@ -36,7 +36,7 @@ export class FindOrderListResolver {
         limit: paging?.limit || 100,
       })
       .sort({ createdAt: -1 });
-
+    console.log(orders[0]);
     const count = await this.orderModel.count(filterQuery);
 
     return {
